@@ -60,17 +60,10 @@ public class GameManager : MonoBehaviour
     {
         for (int i = 0; i < enemiesCount; i++)
         {
-            int point = Random.Range(0, spawnPoints.Length);
-            if (spawnPoints[point].position.z > 0)
-            {
-                i--;
-                continue;
-            }
-            GameObject enemy = Instantiate(enemiePrefabs[Random.Range(0, enemiePrefabs.Length)], spawnPoints[point].position, Quaternion.Euler(new Vector3(0, 0, Random.Range(0, 360))));
+            GameObject enemy = Instantiate(enemiePrefabs[Random.Range(0, enemiePrefabs.Length)], spawnPoints[Random.Range(0, spawnPoints.Length)].position, Quaternion.Euler(new Vector3(0, 0, Random.Range(0, 360))));
             GameObject healthBar = Instantiate(healthBarPrefab, healthPanel);
             enemy.GetComponent<TransportController>().SetHealthBar(healthBar.GetComponent<HealthController>());
             enemies[i] = enemy.transform;
-            spawnPoints[point].position = Vector3.forward;
         }
         StartCoroutine(Countdown());
     }

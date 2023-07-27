@@ -14,6 +14,8 @@ public class MenuManager : MonoBehaviour
 
     private void Start()
     {
+        difficulyButton.sprite = difficulties[DataHolder.difficulty];
+        soundButton.sprite = DataHolder.soundsOn ? sounds[0] : sounds[1];
         tapSound = GetComponent<AudioSource>();
     }
 

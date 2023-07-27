@@ -26,7 +26,7 @@ public class TransportController : MonoBehaviour
         if (target != null)
         {
             float angle = Mathf.Atan2(target.position.y - body.position.y, target.position.x - body.position.x) * Mathf.Rad2Deg - 90;
-            body.rotation = Quaternion.Slerp(body.rotation, Quaternion.Euler(0, 0, angle), 0.01f);
+            body.rotation = Quaternion.Slerp(body.rotation, Quaternion.Euler(0, 0, angle), 0.1f);
         }
     }
     private protected void Shooting(Transform body)
@@ -66,7 +66,7 @@ public class TransportController : MonoBehaviour
                     Defeat();
                 }
             }
-            Destroy(collision.gameObject);
+            collision.transform.GetComponent<BulletController>().Remove();
         }
     }
 
@@ -75,6 +75,7 @@ public class TransportController : MonoBehaviour
         target = null;
         GetComponent<MovementController>().Defeat();
         Destroy(healthBar.gameObject);
-        Instantiate(defeat, transform.position, transform.rotation, transform);
+        GameObject explosion = Instantiate(defeat, transform.position, transform.rotation, transform);
+        if (DataHolder.soundsOn) explosion.GetComponent<AudioSource>().Play();
     }
 }

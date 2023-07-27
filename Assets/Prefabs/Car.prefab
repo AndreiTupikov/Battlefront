@@ -261,7 +261,7 @@ MonoBehaviour:
   movingSpeed: 1
   reloadTime: 2
   bulletsPerShot: 3
-  damage: 1
+  damage: 2
   wheelsAnimators:
   - {fileID: 438948164690661772}
   - {fileID: 964027226369486295}
